@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harvin Web Studio | IT & Digital Solutions</title>
+    <style>
+        /* --- Base & Dark Theme Variables --- */
+        :root {
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #2ea043;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-blue);
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: #79c0ff;
+        }
+
+        /* --- Navigation --- */
+        header {
+            padding: 2rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(13, 17, 23, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-blue);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* --- Hero Section (Split Layout) --- */
+        .hero {
+            padding: 8rem 10%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 70vh;
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-pic {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 50%;
+            border: 4px solid var(--accent-blue);
+            box-shadow: 0 0 25px rgba(88, 166, 255, 0.15);
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-green);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #3fb950;
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-main);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-main);
+        }
+
+        /* --- Services & Grid Layout --- */
+        .section-title {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .services {
+            padding: 5rem 10%;
+            background-color: var(--bg-card);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-dark);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+        }
+
+        .card h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* --- Portfolio Section --- */
+        .portfolio {
+            padding: 5rem 10%;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: #1f2428;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+            border: 1px solid #30363d;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 3rem 10%;
+            background-color: var(--bg-card);
+            text-align: center;
+            border-top: 1px solid #30363d;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            color: var(--text-muted);
+        }
+
+        /* --- Animation Classes (JavaScript controlled) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Full Responsiveness (Mobile & Tablets) --- */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1.5rem 5%;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1.2rem;
+            }
+
+            .hero {
+                flex-direction: column-reverse;
+                padding: 6rem 5%;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-content {
+                align-items: center;
+            }
+
+            .profile-pic {
+                max-width: 250px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero div {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                gap: 1rem;
+            }
+
+            .btn-outline {
+                margin-left: 0;
+            }
+
+            .services, .portfolio, footer {
+                padding: 4rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Harvin <span>Web Studio</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content reveal">
+            <h1>Integrated IT & Digital Solutions.</h1>
+            <p>Bridging the gap between complex technical infrastructure and stunning digital storefronts. From custom web development to secure network engineering.</p>
+            <div>
+                <a href="https://wa.me/255750745490" class="btn" target="_blank">Start a Project</a>
+                <a href="https://github.com/iamharvin" class="btn btn-outline" target="_blank">View GitHub</a>
+            </div>
+        </div>
+        <div class="hero-image reveal">
+            <img src="kev.jpg" alt="Harvin - Lead IT Specialist" class="profile-pic">
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <h2 class="section-title reveal">Core Competencies</h2>
+        <div class="grid">
+            <div class="card reveal">
+                <h3>🌐 Web & Software Engineering</h3>
+                <p>Developing clean, responsive websites and dynamic web applications using HTML5, CSS3, JavaScript, and Python.</p>
+            </div>
+            <div class="card reveal">
+                <h3>⚙️ Cisco Network Engineering</h3>
+                <p>Designing optimized network architectures, robust routing protocols, and custom subnetting solutions for scale.</p>
+            </div>
+            <div class="card reveal">
+                <h3>🛍️ E-Commerce Architecture</h3>
+                <p>Building high-converting digital marketplaces and crafting brand-focused UI/UX using platforms like Shopify and Figma.</p>
+            </div>
+            <div class="card reveal">
+                <h3>🔧 IT Systems & Hardware</h3>
+                <p>Advanced diagnostic troubleshooting, Linux OS deployments, component-level repair, and deep data recovery protocols.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+        <h2 class="section-title reveal">Featured Case Studies</h2>
+        <div class="grid">
+            
+            <div class="card reveal">
+                <h3>Hope Horizon Adventist Healthcare</h3>
+                <p>Designed and developed a comprehensive digital web presence for a medical institution, ensuring accessible patient information and a clean, professional aesthetic.</p>
+                <div class="portfolio-tags">
+                    <span class="tag">Web Development</span>
+                    <span class="tag">Healthcare UI</span>
+                    <span class="tag">Responsive Design</span>
+                </div>
+            </div>
+
+            <div class="card reveal">
+                <h3>ScholarVault Digital Library</h3>
+                <p>Currently architecting an accessible online resource platform for students to seamlessly discover, organize, and download academic learning materials.</p>
+                <div class="portfolio-tags">
+                    <span class="tag">In Development</span>
+                    <span class="tag">E-Learning</span>
+                    <span class="tag">Database Architecture</span>
+                </div>
+            </div>
+
+            <div class="card reveal">
+                <h3>Enterprise Data Recovery Protocol</h3>
+                <p>Successfully executed a deep diagnostic data recovery of 89 GB of lost assets, followed by a secure system migration.</p>
+                <div class="portfolio-tags">
+                    <span class="tag">QPhotoRec</span>
+                    <span class="tag">Linux Mint</span>
+                    <span class="tag">Hardware Diagnostics</span>
+                </div>
+            </div>
+
+            <div class="card reveal">
+                <h3>Corporate Network Topology</h3>
+                <p>Architected hierarchical network designs implementing custom IP addressing and dynamic routing protocols.</p>
+                <div class="portfolio-tags">
+                    <span class="tag">Cisco Packet Tracer</span>
+                    <span class="tag">Subnetting</span>
+                    <span class="tag">Infrastructure</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2 style="color: white; margin-bottom: 1rem;">Let's Build Something Great</h2>
+        <p>Ready to upgrade your digital infrastructure or web presence?</p>
+        <p style="margin-top: 1.5rem;">
+            <strong>Email:</strong> <a href="mailto:harunkelvin24@gmail.com">harunkelvin24@gmail.com</a>
+        </p>
+         <p><strong>Whatsapp:</strong> +255 750 745 490</p>
+        <p><strong>Location:</strong> Dar es Salaam, Tanzania</p>
+        <p style="margin-top: 2rem; font-size: 0.9rem;">&copy; 2026 Harvin Web Studio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisibleThreshold = 100;
+
+                animateElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    
+                    if (elementTop < windowHeight - elementVisibleThreshold) {
+                        element.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll();
+        });
+    </script>
+</body>
+</html>
